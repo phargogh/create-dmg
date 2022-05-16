@@ -436,6 +436,8 @@ unmounting_attempts=0
 until
   echo "Unmounting disk image..."
   (( unmounting_attempts++ ))
+  # hdiutil manpage suggests that umount might need to be called if disk arbitration is not running.
+  umount "${DEV_NAME}"
   hdiutil detach "${DEV_NAME}"
 	exit_code=$?
 	(( exit_code ==  0 )) && break            # nothing goes wrong
