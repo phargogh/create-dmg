@@ -438,7 +438,7 @@ until
   (( unmounting_attempts++ ))
   # hdiutil manpage suggests that umount might need to be called if disk arbitration is not running.
   umount "${DEV_NAME}"
-  hdiutil detach "${DEV_NAME}"
+  hdiutil detach "${DEV_NAME}" -force
 	exit_code=$?
 	(( exit_code ==  0 )) && break            # nothing goes wrong
 	(( exit_code != 16 )) && exit $exit_code  # exit with the original exit code
